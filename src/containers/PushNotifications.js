@@ -22,6 +22,9 @@ const style = StyleSheet.create({
 });
 
 export default class PushNotifications extends Component {
+	componentWillMount() {
+		registerForPushNotificationsAsync();
+	}
 	componentDidMount() {
 		AsyncStorage.getItem('token', (err, result) => {
 			this.setState({ token: result });
@@ -57,7 +60,7 @@ export default class PushNotifications extends Component {
 					onPress={() => this.props.navigation.navigate('DrawerOpen')}
 				/>
 
-				<Text>TOKEN: </Text>
+				<Text>TOKEN: {this.state.token}</Text>
 				<TextInput value={this.state.token} />
 			</View>
 		);
